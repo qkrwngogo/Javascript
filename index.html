@@ -9,18 +9,22 @@
   <body>
     <h2 id="clock"></h2>
     <form id="login-form" class="hidden">
-      <input
-        required
-        maxlength="15"
-        type="text"
-        placeholder="what is your name?"
-      />
-      <input type="submit" value="Log in">
+      <div class="login-form__user-name">
+        <input
+          required
+          maxlength="15"
+          type="text"
+          placeholder="what is your name?"
+        />
+        <input type="submit" value="Log in">
+      </div>
     </form>
-    <span id="sayHello" class="hidden"></span>
-    <span id="greeting" class="hidden"></span>
+    <div id="user">
+      <span id="sayHello" class="hidden"></span>
+      <span id="greeting" class="hidden"></span>
+    </div>
     <form id="todo-form">
-      <input type="text" placeholder="Write a To Do and Press Endter" required>
+      <input type="text" placeholder="Write a To Do and Press Endter" class="todo-form__todo"required>
     </form>
     <ul id="todo-list">
     </ul>

@@ -1,6 +1,7 @@
 const loginForm = document.querySelector("#login-form");
 const loginInput = document.querySelector("#login-form input");
 const greeting = document.querySelector("#greeting");
+const user = document.querySelector("#user");
 
 const HIDDEEN_CLASSNAME = "hidden";
 const USERNAME_KEY = "username";
