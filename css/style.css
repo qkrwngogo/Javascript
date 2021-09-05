@@ -1,4 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;900&display=swap");
+@keyframes removing-animation {
+  0% {
+       opacity: 100%;
+       transform: translateX(0);
+   }
+
+   30% {
+       opacity: 80%;
+       transform: translateX(50px);
+   }
+
+   80% {
+       opacity: 10%;
+       transform: translateX(-800px);
+   }
+
+   100% {
+       opacity: 0;
+       transform: translateX(-800px);
+   }
+}
+
 
 * {
   color: #fff;
@@ -122,6 +144,11 @@ form {
   justify-content: space-around;
   align-items: center;
   background-color: #00000071;
+  transition: all 0.3s ease;
+  padding: 5px;
+}
+#todo-list .removing {
+  animation: removing-animation .8s cubic-bezier(.65,-0.02,.72,.29);
 }
 #todo-list li:hover {
   background-color: #000000a6;
@@ -136,7 +163,6 @@ form {
   text-decoration: line-through;
 }
 #todo-list li > * {
-  margin: 5px 10px;
 }
 .todo-list__check-box {
   flex: 1;
@@ -162,6 +188,6 @@ form {
   cursor: pointer;
   font-weight: 900;
 }
-.todo-list__button:hover {
+li:not(.checked) .todo-list__button:hover {
   color: #eb4e4bc9;
 }
