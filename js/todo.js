@@ -5,7 +5,16 @@ const toDoList = document.querySelector("#todo-list");
 const TODOS_KEY = "todos";
 
 let toDos = [];
+
 function handleCheckBox(event) {
+  
+  if (event.target.checked) {
+    event.target.setAttribute("checked", "");
+    event.target.parentElement.classList.add("checked");
+  } else {
+    event.target.removeAttribute("checked");
+    event.target.parentElement.classList.remove("checked");
+  }
   const id = event.path[1].id;
   const targetId = toDos.findIndex((toDo) => toDo.id == id);
   toDos[targetId].isChecked = event.target.checked;
@@ -43,9 +52,11 @@ function paintToDo(newToDo) {
   checkBox.type = "checkbox";
 
   if (newToDo.isChecked) {
-    checkBox.setAttribute("checked", "checked");
+    checkBox.setAttribute("checked", "");
+    li.classList.add("checked");
   } else {
     checkBox.removeAttribute("checked");
+    li.classList.remove("checked");
   }
 
   checkBox.addEventListener("click", handleCheckBox);
