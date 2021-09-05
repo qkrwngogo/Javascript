@@ -7,7 +7,6 @@ const TODOS_KEY = "todos";
 let toDos = [];
 
 function handleCheckBox(event) {
-  
   if (event.target.checked) {
     event.target.setAttribute("checked", "");
     event.target.parentElement.classList.add("checked");
@@ -27,7 +26,7 @@ function convertDate(date) {
   const day = String(date.getDate()).padStart(2, "0");
   const hour = String(date.getHours()).padStart(2, "0");
   const minute = String(date.getMinutes()).padStart(2, "0");
-  return `${year}/${month}/${day} ${hour}:${minute}`;
+  return `<span>${year}.${month}.${day}</span><span>${hour}:${minute}</span>`;
 }
 
 function saveToDos() {
@@ -45,12 +44,14 @@ function paintToDo(newToDo) {
   const li = document.createElement("li");
   li.id = newToDo.id;
   const checkBox = document.createElement("input");
+  checkBox.classList.add("todo-list__check-box");
   const span = document.createElement("span");
-  const time = document.createElement("span");
+  span.classList.add("todo-list__text");
+  const time = document.createElement("div");
+  time.classList.add("todo-list__time");
   const button = document.createElement("i");
-  checkBox.className = "check-box";
+  
   checkBox.type = "checkbox";
-
   if (newToDo.isChecked) {
     checkBox.setAttribute("checked", "");
     li.classList.add("checked");
@@ -61,13 +62,14 @@ function paintToDo(newToDo) {
 
   checkBox.addEventListener("click", handleCheckBox);
   button.setAttribute("class", "fas fa-times");
+  button.classList.add("todo-list__button")
   button.addEventListener("click", deleteToDo);
   li.appendChild(checkBox);
   li.appendChild(span);
   li.appendChild(time);
   li.appendChild(button);
   span.innerText = newToDo.text;
-  time.innerText = convertDate(new Date(newToDo.id));
+  time.innerHTML = convertDate(new Date(newToDo.id));
   toDoList.appendChild(li);
 }
 function handleToDoSubmit(event) {

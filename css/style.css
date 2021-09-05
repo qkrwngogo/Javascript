@@ -5,18 +5,50 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  /* border: 1px solid #fff; */
   font-family: "Noto Sans KR", sans-serif;
+}
+html {
+  position: relative;
 }
 body {
   min-width: 800px;
 }
-#clock {
+#weather {
   margin-top: 70px;
   display: flex;
   justify-content: center;
+}
+#weather div {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+#weather div > * {
+  text-align: center;
+  flex: 1;
+  margin: 0 20px;
+}
+#clock {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  font-size: 120px;
+  font-size: 100px;
+}
+#quote {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+#quote span:first-child {
+  color: #dfe6e9;
+  font-size: 15px;
+  font-weight: 900;
+}
+#quote span:last-child {
+  color: #dfe6e9;
+  font-size: 15px;
+  font-weight: 900;
 }
 form {
   text-align: center;
@@ -34,7 +66,7 @@ form {
 }
 .login-form__user-name input {
   text-align: center;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   border-width: 0;
   border-bottom: 3px solid #fff;
   outline: none;
@@ -48,7 +80,7 @@ form {
   color: #fff;
 }
 .login-form__user-name button {
-  background: rgba(0,0,0,0);
+  background: rgba(0, 0, 0, 0);
   border-width: 0;
   cursor: pointer;
   font-size: 30px;
@@ -70,9 +102,55 @@ form {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.8);
   border-width: 0;
-  width: 500px;
+  width: 55%;
   height: 50px;
   color: #000000;
   font-size: 25px;
+  font-weight: 900;
+}
+#todo-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+#todo-list li {
+  width: 60%;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #00000071;
+}
+#todo-list .checked {
+  background-color: #eb4e4bc9;
+}
+#todo-list .checked .todo-list__text {
+  text-decoration: line-through;
+}
+#todo-list li > * {
+  margin: 5px 10px;
+}
+.todo-list__check-box {
+  flex: 1;
+  width: 50%;
+  height: 50%;
+}
+.todo-list__text {
+  flex: 16;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+}
+.todo-list__time {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.todo-list__button {
+  flex: 1;
+  font-size: 30px;
   font-weight: 900;
 }
