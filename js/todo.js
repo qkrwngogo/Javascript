@@ -45,10 +45,13 @@ function paintToDo(newToDo) {
   li.id = newToDo.id;
   const checkBox = document.createElement("input");
   checkBox.classList.add("todo-list__check-box");
-  const span = document.createElement("span");
-  span.classList.add("todo-list__text");
-  const time = document.createElement("div");
+  checkBox.id = newToDo.id - 1;
+  const label = document.createElement("label");
+  label.classList.add("todo-list__text");
+  label.htmlFor = `${checkBox.id}`
+  const time = document.createElement("label");
   time.classList.add("todo-list__time");
+  time.htmlFor = `${checkBox.id}`
   const button = document.createElement("i");
   
   checkBox.type = "checkbox";
@@ -65,10 +68,10 @@ function paintToDo(newToDo) {
   button.classList.add("todo-list__button")
   button.addEventListener("click", deleteToDo);
   li.appendChild(checkBox);
-  li.appendChild(span);
+  li.appendChild(label);
   li.appendChild(time);
   li.appendChild(button);
-  span.innerText = newToDo.text;
+  label.innerText = newToDo.text;
   time.innerHTML = convertDate(new Date(newToDo.id));
   toDoList.appendChild(li);
 }
