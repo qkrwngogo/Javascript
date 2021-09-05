@@ -5,6 +5,12 @@ const toDoList = document.querySelector("#todo-list");
 const TODOS_KEY = "todos";
 
 let toDos = [];
+function handleCheckBox(event) {
+  const id = event.path[1].id;
+  const targetId = toDos.findIndex((toDo) => toDo.id == id);
+  toDos[targetId].isChecked = event.target.checked;
+  saveToDos();
+}
 
 function convertDate(date) {
   const year = String(date.getFullYear()).substr(-2);
@@ -29,11 +35,23 @@ function deleteToDo(event) {
 function paintToDo(newToDo) {
   const li = document.createElement("li");
   li.id = newToDo.id;
+  const checkBox = document.createElement("input");
   const span = document.createElement("span");
   const time = document.createElement("span");
   const button = document.createElement("i");
+  checkBox.className = "check-box";
+  checkBox.type = "checkbox";
+
+  if (newToDo.isChecked) {
+    checkBox.setAttribute("checked", "checked");
+  } else {
+    checkBox.removeAttribute("checked");
+  }
+
+  checkBox.addEventListener("click", handleCheckBox);
   button.setAttribute("class", "fas fa-times");
   button.addEventListener("click", deleteToDo);
+  li.appendChild(checkBox);
   li.appendChild(span);
   li.appendChild(time);
   li.appendChild(button);
@@ -48,6 +66,7 @@ function handleToDoSubmit(event) {
   const newToDoObj = {
     text: newToDo,
     id: Date.now(),
+    isChecked: false,
   };
   toDos.push(newToDoObj);
   paintToDo(newToDoObj);
