@@ -6,12 +6,12 @@
    }
 
    30% {
-       opacity: 80%;
+       opacity: 70%;
        transform: translateX(50px);
    }
 
    80% {
-       opacity: 10%;
+       opacity: 20%;
        transform: translateX(-800px);
    }
 
@@ -157,7 +157,7 @@ form {
   height: 100%;
 }
 #todo-list li {
-  width: 98%;
+  width: 90%;
   height: 50px;
   display: flex;
   justify-content: space-around;
