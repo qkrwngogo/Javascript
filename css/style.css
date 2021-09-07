@@ -134,15 +134,29 @@ form {
   font-size: 25px;
   font-weight: 900;
 }
+#list-box {
+  overflow-y: scroll;
+  width: 70%;
+  margin: 0 auto;
+  height: 500px;
+  
+}
+#list-box::-webkit-scrollbar {
+  width: 14px;
+}
+#list-box::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+}
 #todo-list {
+  margin-left: 14px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
+  height: 100%;
 }
 #todo-list li {
-  width: 60%;
+  width: 98%;
   height: 50px;
   display: flex;
   justify-content: space-around;
@@ -208,4 +222,8 @@ form.todo-list__text input {
 }
 li:not(.checked) .todo-list__button:hover {
   color: #eb4e4bc9;
+}
+.page__next-button {
+  width: 100px;
+  height: 50px;
 }

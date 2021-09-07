@@ -1,6 +1,7 @@
 const toDoForm = document.querySelector("#todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.querySelector("#todo-list");
+
 const TODOS_KEY = "todos";
 
 let toDos = [];
@@ -19,16 +20,6 @@ function handleCheckBox(event) {
   saveToDos();
 }
 
-// page
-function addPage() {
-  const lastPage = Math.ceil(toDos.length / 8);
-  if (lastPage >= 2) {
-    // add page button
-    
-  } else {
-    // delete page button
-  }
-}
 // change To Do
 function changeToDo(event) {
   event.preventDefault();
@@ -89,13 +80,10 @@ function deleteToDo(event) {
     toDos = toDos.filter((toDo) => toDo.id !== parseInt(parentLi.id));
     saveToDos();
   }, 700);
-  addPage();
 }
 
 // load To Do
 function paintToDo(newToDo) {
-  addPage();
-
   const li = document.createElement("li");
   li.id = newToDo.id;
   const checkBox = document.createElement("input");
@@ -104,7 +92,6 @@ function paintToDo(newToDo) {
   const edit = document.createElement("i");
   const button = document.createElement("i");
 
-  // list under 8
   //checkBox
   checkBox.classList.add("todo-list__check-box");
   checkBox.id = newToDo.id - 1;
