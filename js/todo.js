@@ -1,7 +1,6 @@
 const toDoForm = document.querySelector("#todo-form");
 const toDoInput = toDoForm.querySelector("input");
 const toDoList = document.querySelector("#todo-list");
-
 const TODOS_KEY = "todos";
 
 let toDos = [];
@@ -20,10 +19,24 @@ function handleCheckBox(event) {
   saveToDos();
 }
 
+// page
+function addPage() {
+  const lastPage = Math.ceil(toDos.length / 8);
+  if (lastPage >= 2) {
+    // add page button
+    
+  } else {
+    // delete page button
+  }
+}
 // change To Do
 function changeToDo(event) {
   event.preventDefault();
-  const parentLi = event.target.parentElement;
+  let target = event.target;
+  if (event.relatedTarget === null) {
+    target = event.target.parentElement;
+  }
+  const parentLi = target.parentElement;
   const curInput = parentLi.querySelector(".todo-list__text input");
   const curCheckBox = parentLi.querySelector(".todo-list__check-box");
   const newLabel = document.createElement("label");
@@ -32,9 +45,7 @@ function changeToDo(event) {
   newLabel.innerText = curInput.value;
   const newText = toDos.findIndex((toDo) => toDo.id == parentLi.id);
   toDos[newText].text = newLabel.innerText;
-  parentLi.replaceChild(newLabel, event.target);
-  
-  
+  parentLi.replaceChild(newLabel, target);
   saveToDos();
 }
 
@@ -49,22 +60,23 @@ function convertDate(date) {
 
 // edit To Do
 function editTodo(event) {
+  event.preventDefault();
   const parentLi = event.target.parentElement;
   const curLabel = parentLi.querySelector(".todo-list__text");
   const editForm = document.createElement("form");
   const editInput = document.createElement("input");
   editInput.type = "text";
-  editInput.setAttribute("required","");
+  editInput.setAttribute("required", "");
   editForm.classList.add("todo-list__text");
   editInput.placeholder = curLabel.innerText;
   editForm.appendChild(editInput);
   parentLi.replaceChild(editForm, curLabel);
   editForm.addEventListener("submit", changeToDo);
+  editForm.addEventListener("focusout", changeToDo);
 }
 
 // save To Do
 function saveToDos() {
-  console.log(toDos.length);
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
@@ -77,10 +89,13 @@ function deleteToDo(event) {
     toDos = toDos.filter((toDo) => toDo.id !== parseInt(parentLi.id));
     saveToDos();
   }, 700);
+  addPage();
 }
 
 // load To Do
 function paintToDo(newToDo) {
+  addPage();
+
   const li = document.createElement("li");
   li.id = newToDo.id;
   const checkBox = document.createElement("input");
@@ -89,6 +104,7 @@ function paintToDo(newToDo) {
   const edit = document.createElement("i");
   const button = document.createElement("i");
 
+  // list under 8
   //checkBox
   checkBox.classList.add("todo-list__check-box");
   checkBox.id = newToDo.id - 1;
@@ -129,6 +145,7 @@ function paintToDo(newToDo) {
   time.innerHTML = convertDate(new Date(newToDo.id));
   toDoList.appendChild(li);
 }
+
 function handleToDoSubmit(event) {
   event.preventDefault();
   const newToDo = toDoInput.value;
