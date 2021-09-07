@@ -23,7 +23,11 @@ function handleCheckBox(event) {
 // change To Do
 function changeToDo(event) {
   event.preventDefault();
-  const parentLi = event.target.parentElement;
+  let target = event.target;
+  if (event.relatedTarget === null) {
+    target = event.target.parentElement;
+  }
+  const parentLi = target.parentElement;
   const curInput = parentLi.querySelector(".todo-list__text input");
   const curCheckBox = parentLi.querySelector(".todo-list__check-box");
   const newLabel = document.createElement("label");
@@ -32,9 +36,7 @@ function changeToDo(event) {
   newLabel.innerText = curInput.value;
   const newText = toDos.findIndex((toDo) => toDo.id == parentLi.id);
   toDos[newText].text = newLabel.innerText;
-  parentLi.replaceChild(newLabel, event.target);
-  
-  
+  parentLi.replaceChild(newLabel, target);
   saveToDos();
 }
 
@@ -49,22 +51,23 @@ function convertDate(date) {
 
 // edit To Do
 function editTodo(event) {
+  event.preventDefault();
   const parentLi = event.target.parentElement;
   const curLabel = parentLi.querySelector(".todo-list__text");
   const editForm = document.createElement("form");
   const editInput = document.createElement("input");
   editInput.type = "text";
-  editInput.setAttribute("required","");
+  editInput.setAttribute("required", "");
   editForm.classList.add("todo-list__text");
   editInput.placeholder = curLabel.innerText;
   editForm.appendChild(editInput);
   parentLi.replaceChild(editForm, curLabel);
   editForm.addEventListener("submit", changeToDo);
+  editForm.addEventListener("focusout", changeToDo);
 }
 
 // save To Do
 function saveToDos() {
-  console.log(toDos.length);
   localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
 }
 
@@ -129,6 +132,7 @@ function paintToDo(newToDo) {
   time.innerHTML = convertDate(new Date(newToDo.id));
   toDoList.appendChild(li);
 }
+
 function handleToDoSubmit(event) {
   event.preventDefault();
   const newToDo = toDoInput.value;
